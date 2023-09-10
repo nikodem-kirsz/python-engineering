@@ -9,6 +9,7 @@ It suggests that multiple tasks have the ability to run in an overlapping manner
 
 Threading is a concurrent execution model whereby multiple threads take turns 
 executing tasks. One process can contain multiple threads. 
+```bash
 
                     Concurency
     (tasks have ability to run in overlapping manner)
@@ -18,5 +19,6 @@ executing tasks. One process can contain multiple threads.
     Multiprocessing(CPU)   *-------Threading(I/O)         \ 
             /                       \                      \
     multiprocessing   concurent.features.Threading     *----asyncio----*
-         /                             \                      \                
- Many processes(many GILs)  preemptive multitasking    cooperative multitaksing
+         /                             \                      \
+Many processes(many GILs)  preemptive multitasking    cooperative multitaksing
+```
