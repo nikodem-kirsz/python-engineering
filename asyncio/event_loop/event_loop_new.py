@@ -29,11 +29,20 @@ async def main():
         asyncio.create_task(future()),
     ]
 
+    asyncio.set_event_loop(loop3)
     tasks3 = [
         asyncio.create_task(past()),
         asyncio.create_task(future()),
         asyncio.create_task(future()),
     ]
+    single_task2 = await future()
+    print(f"single_task: {single_task2}")
+
+    single_task = await asyncio.create_task(past())
+    print(f"single_task: {single_task}")
+
+    single_task2 = await asyncio.create_task(future())
+    print(f"single_task: {single_task2}")
 
     # Use asyncio.gather() to await the completion of tasks
     results1 = await asyncio.gather(*tasks1)
