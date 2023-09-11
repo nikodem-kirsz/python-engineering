@@ -27,6 +27,7 @@ async def main():
     return [results1, results2]
 
 if __name__ == "__main__":
+    # Run main in event loop
     result = asyncio.run(main())
     print("Result", result)
 
@@ -47,17 +48,23 @@ def main():
     # Create the second event loop
     loop2 = asyncio.new_event_loop()
 
-    # Run coroutine1 on the first event loop
+    # It has to be set due to main not being run in a event loop
     asyncio.set_event_loop(loop1)
-    loop1.run_until_complete(coroutine1())
+    try:
+        loop1.run_until_complete(asyncio.gather(coroutine1(), coroutine2()))
+    finally:
+        loop1.close()
 
-    # Run coroutine2 on the second event loop
     asyncio.set_event_loop(loop2)
-    loop2.run_until_complete(coroutine2())
+    try:
+        loop2.run_until_complete(asyncio.gather(coroutine1(), coroutine2()))
+    finally:
+        loop2.close()
 
     # Close the event loops
     loop1.close()
     loop2.close()
 
 if __name__ == "__main__":
+    # Run a function not in an event loop
     main()    
