@@ -37,6 +37,8 @@ async def main(nprod: int, ncon: int):
     q = asyncio.Queue()
     producers = [asyncio.create_task(produce(n, q)) for n in range(nprod)]
     consumers = [asyncio.create_task(consume(n, q)) for n in range(ncon)]
+    # producers are awaited explicitly using asyncio.gather, 
+    # the consumers are implicitly awaited as they continue to run until the queue is empty.
     await asyncio.gather(*producers)
     # blocks until all items in the queue have been received and processed,
     await q.join() # Implicitly awaits consumer, too

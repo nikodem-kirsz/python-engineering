@@ -23,7 +23,7 @@ executing tasks. One process can contain multiple threads.
 Many processes(many GILs)  preemptive multitasking    cooperative multitaksing
 ```
 
- - Asynchronous routines are able to “pause” while waiting on their ultimate result and let other routines run in the meantime.
+- Asynchronous routines are able to “pause” while waiting on their ultimate result and let other routines run in the meantime.
 
 - Asynchronous code, through the mechanism above, facilitates concurrent execution. To put it differently, asynchronous code gives the look and feel of concurrency.
 
@@ -43,4 +43,31 @@ async def m(x):
 def m(x):
     y = await z(x)  # Still no - SyntaxError (no `async def` here)
     return y
+```
+
+## Relevant methods
+
+```python
+# Runs event loop
+asyncio.run()
+asyncio.new_event_loop()
+asyncio.gather(future(), future(), past(), future())
+asyncio.create_task(coro([3,2,1]))
+asyncio.all_tasks()
+asyncio.sleep(1)
+
+
+routine = main()
+asyncio.run(routine)
+loop = asyncio.new_event_loop()
+try:
+    loop.run_until_complete(main())
+finally:
+    loop.close() 
+
+
+t1 = asyncio.create_task(coro([3,2,1]))
+t2 = asyncio.create_task(coro([10,5,0]))
+for res in asyncio.as_completed((t1, t2)):
+    compl = await res   
 ```
