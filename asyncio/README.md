@@ -56,7 +56,6 @@ asyncio.create_task(coro([3,2,1]))
 asyncio.all_tasks()
 asyncio.sleep(1)
 
-
 routine = main()
 asyncio.run(routine)
 loop = asyncio.new_event_loop()
@@ -69,5 +68,5 @@ finally:
 t1 = asyncio.create_task(coro([3,2,1]))
 t2 = asyncio.create_task(coro([10,5,0]))
 for res in asyncio.as_completed((t1, t2)):
-    compl = await res   
+    compl = await res
 ```
