@@ -11,7 +11,6 @@ import concurrent.futures
 # multiprocessing (running on 30 processes and 8 cores on CPU) took 1,11 seconds
 
 """
-
 Parallelism consists of performing multiple operations at the same time. 
 Multiprocessing is a means to effect parallelism, and it entails spreading 
 tasks over a computer’s central processing units (CPUs, or cores). 
