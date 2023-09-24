@@ -29,3 +29,25 @@ else:
 finally:
     # Code to execute regardless of exceptions (e.g., cleanup)
     print("Cleanup or final tasks.")
+
+class MyCustomError(Exception):
+    pass
+
+try:
+    raise MyCustomError("This is a custom exception.")
+except MyCustomError as e:
+    print(f"Caught a custom exception: {e}")
+
+class MyCustomError(Exception):
+    def __init__(self, message, code=None):
+        super().__init__(message)
+        self.code = code
+
+try:
+    raise MyCustomError("Custom exception with code", code = 42)
+
+except MyCustomError as e:
+    print(f"Caught a custom exception: {e}")
+    print(f"Exception code: {e.code}")
+
+print("Continueee.....")
