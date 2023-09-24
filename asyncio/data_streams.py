@@ -13,6 +13,9 @@ Received data point: 60
 Received data point: 71
 Received data point: 60
 """
+
+# Async generator yielding values based on the randomized number 
+# and consumer waiting and reading async data
 async def async_data_stream():
     for _ in range(10):
         await asyncio.sleep(random.uniform(0.1, 1.0))  # Simulate varying delays
@@ -29,11 +32,12 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 
-
+# Event messaging with asyncio.Queue broadcasting and receiving messages
 async def async_data_stream(queue: asyncio.Queue()):
     for _ in range(10):
         await asyncio.sleep(random.uniform(0.1, 1.0))
         data = random.randint(1, 100)
+        print(f"Broadcasting {data} into the queue.")
         await queue.put(data)
 
 async def consume_async_data_stream(queue: asyncio.Queue()):
