@@ -5,21 +5,35 @@ We'll use a round-robin algorithm to distribute requests evenly.
 """
 
 import unittest
+import threading
 
 class LoadBalancer():
+    _instance_lock = threading.Lock()
+    instance = None
+
+    def __new__(cls, servers):
+        if not cls.instance:
+            with cls._instance_lock:
+                if not cls.instance:
+                    cls.instance = super(LoadBalancer, cls).__new__(cls)
+                    cls.instance.__init__(servers)
+        return cls.instance
+
     def __init__(self, servers=None):
         self._servers = servers or []
         self.current_server = 0
+        self.lock = threading.Lock()
     
     def get_server(self):
-        server = self.servers[self.current_server]
-        self.current_server = (self.current_server + 1) % len(self.servers)
-        # Choose first healthy server to process request
-        while(not server.healthy):
+        with self.lock:
             server = self.servers[self.current_server]
             self.current_server = (self.current_server + 1) % len(self.servers)
+            # Choose first healthy server to process request
+            while(not server.healthy):
+                server = self.servers[self.current_server]
+                self.current_server = (self.current_server + 1) % len(self.servers)
         return server
-    
+
     @property
     def servers(self):
         return self._servers
@@ -45,6 +59,16 @@ class Server():
 
 
 class TestLoadBalancer(unittest.TestCase):
+    def test_singleton(self):
+        lb = LoadBalancer([
+            Server(host="192.168.0.1", port="8081"),
+            Server(host="192.168.0.2", port="8082"), 
+            Server(host="192.168.0.3", port="8083")
+        ])
+        lb2 = LoadBalancer([
+            Server(host="192.168.0.1", port="8081")
+        ])
+        self.assertEqual(id(lb), id(lb2))
     def test_initialization(self):
         lb = LoadBalancer([
             Server(host="192.168.0.1", port="8081"),
