@@ -53,7 +53,7 @@ def find_exchange_rate(src, dst, rates): # "USD", "RUB", [GBPRUB: 100, USDGBP: 0
 # Example usage:
 rates = {"GBPRUB": 100, "USDGBP": 0.7, "GBPEUR": 0.83, "EURRUB": 86.3}
 src = "USD"
-dst = "RUB"
+dst = "PLN"
 exchange_rate, path = find_exchange_rate(src, dst, rates)
 
 if exchange_rate is not None:

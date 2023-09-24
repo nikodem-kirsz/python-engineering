@@ -9,6 +9,7 @@ class Burger:
 class Fries:
     def __str__(self):
         return "Fries"
+    def __get__
 
 class Drink:
     def __init__(self, size, kind):

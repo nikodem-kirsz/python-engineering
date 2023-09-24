@@ -15,6 +15,7 @@ a = ["a", "b", "c", "d"]
 b = ["e", "f", "g", "h"]
 result = [ list(row) for row in list(zip(a,b))]
 print(result)
+# [['a', 'e'], ['b', 'f'], ['c', 'g'], ['d', 'h']]
 
 # Trick 4: Negative indexing lists
 a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

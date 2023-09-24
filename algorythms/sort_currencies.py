@@ -28,4 +28,4 @@ def sort_currencies(transactions_list):
 
 #     return currency_occurrences
 
-print(sort_currencies(["USD", "EUR", "USD=>USD", "EUR=>EUR"]))
+print(sort_currencies(["USD", "EUR=>PLN", "USD=>USD", "EUR=>EUR"]))

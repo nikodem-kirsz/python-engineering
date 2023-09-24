@@ -5,6 +5,7 @@ print(furniture[1:3])
 print(tuple([1,2,3]))
 print(list(furniture))
 print(list('hello'))
+# ['h', 'e', 'l', 'l', 'o']
 
 for item in furniture:
     print(item)
