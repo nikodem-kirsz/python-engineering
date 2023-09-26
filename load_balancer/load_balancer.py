@@ -10,7 +10,7 @@ import threading
 class LoadBalancer():
     _instance_lock = threading.Lock()
     instance = None
-
+    
     def __new__(cls, servers):
         if not cls.instance:
             with cls._instance_lock:
@@ -24,6 +24,8 @@ class LoadBalancer():
         self.current_server = 0
         self.lock = threading.Lock()
     
+    # Round robin algorythm, take next available server until list exhausted then repeated cycle omitting
+    # unhealthy servers
     def get_server(self):
         with self.lock:
             server = self.servers[self.current_server]

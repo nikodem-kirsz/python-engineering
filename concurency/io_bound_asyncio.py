@@ -11,7 +11,7 @@ import requests
 # multiprocessing (running on 30 processes and 8 cores on CPU) took 1,11 seconds
 
 async def download_site(session, url):
-    async with aiohttp.request.get(url) as response:
+    async with session.request.get(url) as response:
         print("Read {0} from {1}".format(response.content_length, url))
 
 async def download_all_sites(sites):

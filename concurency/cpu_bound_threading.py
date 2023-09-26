@@ -23,13 +23,11 @@ def cpu_bound(number):
     return sum(i * i for i in range(number))
 
 def find_sums(numbers):
-    # for number in numbers:
-    #     cpu_bound(number) 
     result = [] 
     with multiprocessing.Pool() as pool:
-        
         result = pool.map(cpu_bound, numbers)
     return result
+
 if __name__ == "__main__":
     numbers = [5_000_000 + x for x in range(20)]
     print(numbers)
