@@ -1,6 +1,5 @@
 import os
 from airflow import DAG
-from airflow.models import Variable
 from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.hooks.gcs import GCSHook
 from airflow.providers.google.cloud.operators.bigquery import (
@@ -10,10 +9,6 @@ from airflow.providers.google.cloud.operators.bigquery import (
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.providers.google.cloud.transfers.gcs_to_gcs import GCSToGCSOperator
 from airflow.utils.dates import days_ago
-
-PROJECT_ID = Variable.get('project')
-LANDING_BUCKET = Variable.get('landing_bucket')
-BACKUP_BUCKET = Variable.get('backup_bucket')
 
 default_arguments = {'owner': 'Niko', 'start_date': days_ago(1)}
 
@@ -32,8 +27,10 @@ def move_objects(source_bucket=None, destination_bucket=None, prefix=None, **kwa
         if prefix:
            destination_object = "{}/{}".format(prefix, storage_object)
         hook.copy(source_bucket, storage_object, destination_bucket, destination_object)
-        hook.delete(source_bucket, storage_object)
+        # hook.delete(source_bucket, storage_object)
 
+LANDING_BUCKET = os.environ.get('LANDING_BUCKET', 'n1-logistics-landing-bucket')
+BACKUP_BUCKET = os.environ.get('BACKUP_BUCKET', 'n1-logistics-backup-bucket')
 DATASET_NAME = os.environ.get("GCP_DATASET_NAME", 'vehicle_analytics')
 TABLE_NAME = os.environ.get("GCP_TABLE_NAME", 'history')
 
@@ -64,7 +61,7 @@ with DAG(
             source_format='CSV',
             skip_leading_rows=1,
             field_delimiter=',',
-            destination_project_dataset_table=f"{PROJECT_ID}.{DATASET_NAME}.{TABLE_NAME}",
+            destination_project_dataset_table=f"{DATASET_NAME}.{TABLE_NAME}",
             create_disposition='CREATE_IF_NEEDED',
             write_disposition='WRITE_TRUNCATE',
             gcp_conn_id='google_cloud_default',
@@ -95,8 +92,8 @@ with DAG(
                task_id='move_files',
                python_callable=move_objects,
                op_kwargs={
-                      'source_bucket': LANDING_BUCKET',
-                      'destination_bucket': BACKUP_BUCKET',
+                      'source_bucket': LANDING_BUCKET,
+                      'destination_bucket': BACKUP_BUCKET,
                       "prefix": "{{ ts_nodash }}",
                },
                provide_context=True
