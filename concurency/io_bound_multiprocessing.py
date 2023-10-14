@@ -25,6 +25,8 @@ def download_site(url):
 def download_all_sites(sites):
     with multiprocessing.Pool(processes=30, initializer=set_global_session) as pool:
         pool.map(download_site, sites)
+    
+    multiprocessing.Process()
         
 if __name__ == '__main__':
     sites = [

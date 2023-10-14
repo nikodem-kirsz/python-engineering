@@ -1,0 +1,5 @@
+{
+    "project": "airflow-400718",
+    "landing_bucket": "n1-logistics-landing-bucket",
+    "backup_bucket": "n1-logistics-backup-bucket"
+}

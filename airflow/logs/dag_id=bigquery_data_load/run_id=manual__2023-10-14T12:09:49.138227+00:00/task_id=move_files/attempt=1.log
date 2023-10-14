@@ -1,0 +1,2 @@
+[2023-10-14T12:09:49.950+0000] {taskinstance.py:1077} INFO - Dependencies not met for <TaskInstance: bigquery_data_load.move_files manual__2023-10-14T12:09:49.138227+00:00 [queued]>, dependency 'Trigger Rule' FAILED: Task's trigger rule 'all_success' requires all upstream tasks to have succeeded, but found 1 non-success(es). upstream_states=_UpstreamTIStates(success=0, skipped=0, failed=0, upstream_failed=0, removed=0, done=0), upstream_task_ids={'create_table'}
+[2023-10-14T12:09:49.951+0000] {local_task_job.py:147} INFO - Task is not able to be run

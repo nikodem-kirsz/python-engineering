@@ -1,0 +1,28 @@
+[2023-10-14T13:38:23.269+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:38:17.713286+00:00 [queued]>
+[2023-10-14T13:38:23.275+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:38:17.713286+00:00 [queued]>
+[2023-10-14T13:38:23.275+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:38:23.275+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-10-14T13:38:23.275+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:38:23.282+0000] {taskinstance.py:1300} INFO - Executing <Task(GCSToBigQueryOperator): gcs_to_big_query> on 2023-10-14 13:38:17.713286+00:00
+[2023-10-14T13:38:23.287+0000] {standard_task_runner.py:55} INFO - Started process 5470 to run task
+[2023-10-14T13:38:23.289+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'bigquery_data_load', 'gcs_to_big_query', 'manual__2023-10-14T13:38:17.713286+00:00', '--job-id', '61', '--raw', '--subdir', 'DAGS_FOLDER/bigquery_data_load.py', '--cfg-path', '/tmp/tmpqsm5d4zy']
+[2023-10-14T13:38:23.291+0000] {standard_task_runner.py:83} INFO - Job 61: Subtask gcs_to_big_query
+[2023-10-14T13:38:23.325+0000] {task_command.py:388} INFO - Running <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:38:17.713286+00:00 [running]> on host 4c2fe63b7c62
+[2023-10-14T13:38:23.361+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Niko
+AIRFLOW_CTX_DAG_ID=bigquery_data_load
+AIRFLOW_CTX_TASK_ID=gcs_to_big_query
+AIRFLOW_CTX_EXECUTION_DATE=2023-10-14T13:38:17.713286+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-10-14T13:38:17.713286+00:00
+[2023-10-14T13:38:23.362+0000] {base.py:73} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2023-10-14T13:38:23.363+0000] {gcs_to_bigquery.py:377} INFO - Using existing BigQuery table for storing data...
+[2023-10-14T13:38:23.363+0000] {credentials_provider.py:323} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2023-10-14T13:38:23.365+0000] {bigquery.py:2260} INFO - Project is not included in destination_project_dataset_table: vehicle_analytics.history; using project "***-400718"
+[2023-10-14T13:38:23.365+0000] {gcs_to_bigquery.py:381} INFO - Executing: {'load': {'autodetect': True, 'createDisposition': 'CREATE_IF_NEEDED', 'destinationTable': {'projectId': '***-400718', 'datasetId': 'vehicle_analytics', 'tableId': 'history'}, 'sourceFormat': 'CSV', 'sourceUris': ['gs://n1-logistics-landing-bucket/*'], 'writeDisposition': 'WRITE_TRUNCATE', 'ignoreUnknownValues': False, 'skipLeadingRows': 1, 'fieldDelimiter': ',', 'quote': None, 'allowQuotedNewlines': False, 'encoding': 'UTF-8'}}
+[2023-10-14T13:38:23.365+0000] {bigquery.py:1542} INFO - Inserting job ***_bigquery_data_load_gcs_to_big_query_2023_10_14T13_38_17_713286_00_00_cba2c832d0b88eabe51ba1426af65546
+[2023-10-14T13:38:26.302+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=bigquery_data_load, task_id=gcs_to_big_query, execution_date=20231014T133817, start_date=20231014T133823, end_date=20231014T133826
+[2023-10-14T13:38:26.353+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-10-14T13:38:26.381+0000] {taskinstance.py:2578} INFO - 1 downstream tasks scheduled from follow-on schedule check

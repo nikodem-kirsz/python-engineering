@@ -1,0 +1,95 @@
+version: '3.4'
+
+# is an extension that defines a set of common configuration options shared by multiple services. 
+# It uses YAML aliases (&common and *common) to reuse this configuration in other services.
+x-common:
+  &common
+  image: apache/airflow:2.5.1
+  # Sets the user and group for the containers. 
+  # It uses an environment variable AIRFLOW_UID to specify the user ID and sets the group ID to 0, which is typically the root group.
+  user: "${AIRFLOW_UID}:0"
+  env_file:
+    - .env
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./logs:/opt/airflow/logs
+    - ./plugins:/opt/airflow/plugins
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ~/.config/gcloud/application_default_credentials.json:/home/airflow/.config/gcloud/application_default_credentials.json
+
+# depends_on: specifies dependencies between services. In this case, it defines that the services postgres and airflow-init 
+# must be healthy or completed successfully before other services that depend on them can start.
+x-depends-on:
+  &depends-on
+  depends_on:
+    postgres:
+      condition: service_healthy
+    airflow-init:
+      condition: service_completed_successfully
+
+services:
+  postgres:
+    # depends_on: Specifies dependencies between services. In this case, it defines that the services postgres and airflow-init 
+    # must be healthy or completed successfully before other services that depend on them can start.
+    image: postgres:13
+    container_name: postgres
+    ports:
+      - "5434:5432"
+    healthcheck:
+      # pg_isready is a PostgreSQL command-line utility that checks the status of a PostgreSQL server. 
+      # It checks whether the server is up and accepting connections.
+      test: [ "CMD", "pg_isready", "-U", "airflow" ]
+      interval: 5s
+      retries: 5
+    env_file:
+      - .env
+
+  scheduler:
+    <<: [ *common, *depends-on ]
+    container_name: airflow-scheduler
+    command: airflow scheduler
+    restart: on-failure
+    ports:
+      - "8793:8793"
+
+  webserver:
+    <<: [ *common, *depends-on ]
+    container_name: airflow-webserver
+    restart: always
+    command: airflow webserver
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "--fail",
+          "http://localhost:8080/health"
+        ]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+
+  airflow-cli:
+    <<: [ *common, *depends-on ]
+    profiles:
+      - debug
+    environment:
+      CONNECTION_CHECK_MAX_COUNT: "0"
+    # Workaround for entrypoint issue. See: https://github.com/apache/airflow/issues/16252
+    command:
+      - bash
+      - -c
+      - airflow
+
+  airflow-init:
+    <<: *common
+    container_name: airflow-init
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /sources/logs /sources/dags /sources/plugins
+        chown -R "${AIRFLOW_UID}:0" /sources/{logs,dags,plugins}
+        exec /entrypoint airflow version

@@ -1,0 +1,28 @@
+[2023-10-14T11:40:21.849+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.create_airflow_dataset manual__2023-10-14T11:40:20.731025+00:00 [queued]>
+[2023-10-14T11:40:21.854+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.create_airflow_dataset manual__2023-10-14T11:40:20.731025+00:00 [queued]>
+[2023-10-14T11:40:21.854+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T11:40:21.854+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-10-14T11:40:21.854+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T11:40:21.861+0000] {taskinstance.py:1300} INFO - Executing <Task(BigQueryCreateEmptyDatasetOperator): create_airflow_dataset> on 2023-10-14 11:40:20.731025+00:00
+[2023-10-14T11:40:21.865+0000] {standard_task_runner.py:55} INFO - Started process 1475 to run task
+[2023-10-14T11:40:21.868+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'bigquery_data_load', 'create_***_dataset', 'manual__2023-10-14T11:40:20.731025+00:00', '--job-id', '27', '--raw', '--subdir', 'DAGS_FOLDER/bigquery_data_load.py', '--cfg-path', '/tmp/tmptnoqcw1k']
+[2023-10-14T11:40:21.869+0000] {standard_task_runner.py:83} INFO - Job 27: Subtask create_***_dataset
+[2023-10-14T11:40:21.909+0000] {task_command.py:388} INFO - Running <TaskInstance: bigquery_data_load.create_airflow_dataset manual__2023-10-14T11:40:20.731025+00:00 [running]> on host 4c2fe63b7c62
+[2023-10-14T11:40:21.950+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Niko
+AIRFLOW_CTX_DAG_ID=bigquery_data_load
+AIRFLOW_CTX_TASK_ID=create_***_dataset
+AIRFLOW_CTX_EXECUTION_DATE=2023-10-14T11:40:20.731025+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-10-14T11:40:20.731025+00:00
+[2023-10-14T11:40:21.951+0000] {base.py:73} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2023-10-14T11:40:21.951+0000] {credentials_provider.py:323} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2023-10-14T11:40:21.953+0000] {bigquery.py:451} INFO - datasetId was not specified in `dataset_reference`. Will use default value vehicle_analytics.
+[2023-10-14T11:40:21.953+0000] {bigquery.py:451} INFO - projectId was not specified in `dataset_reference`. Will use default value ***-400718.
+[2023-10-14T11:40:21.954+0000] {bigquery.py:461} INFO - Creating dataset: vehicle_analytics in project: ***-400718 
+[2023-10-14T11:40:22.800+0000] {bigquery.py:1836} INFO - Dataset vehicle_analytics already exists.
+[2023-10-14T11:40:22.825+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=bigquery_data_load, task_id=create_***_dataset, execution_date=20231014T114020, start_date=20231014T114021, end_date=20231014T114022
+[2023-10-14T11:40:22.877+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-10-14T11:40:22.910+0000] {taskinstance.py:2578} INFO - 1 downstream tasks scheduled from follow-on schedule check

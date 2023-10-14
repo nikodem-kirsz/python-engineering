@@ -1,0 +1,49 @@
+[2023-10-14T13:10:00.996+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:09:55.445694+00:00 [queued]>
+[2023-10-14T13:10:01.001+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:09:55.445694+00:00 [queued]>
+[2023-10-14T13:10:01.002+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:10:01.002+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-10-14T13:10:01.002+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:10:01.009+0000] {taskinstance.py:1300} INFO - Executing <Task(GCSToBigQueryOperator): gcs_to_big_query> on 2023-10-14 13:09:55.445694+00:00
+[2023-10-14T13:10:01.014+0000] {standard_task_runner.py:55} INFO - Started process 4592 to run task
+[2023-10-14T13:10:01.016+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'bigquery_data_load', 'gcs_to_big_query', 'manual__2023-10-14T13:09:55.445694+00:00', '--job-id', '49', '--raw', '--subdir', 'DAGS_FOLDER/bigquery_data_load.py', '--cfg-path', '/tmp/tmpjdl09t3l']
+[2023-10-14T13:10:01.018+0000] {standard_task_runner.py:83} INFO - Job 49: Subtask gcs_to_big_query
+[2023-10-14T13:10:01.055+0000] {task_command.py:388} INFO - Running <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:09:55.445694+00:00 [running]> on host 4c2fe63b7c62
+[2023-10-14T13:10:01.093+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Niko
+AIRFLOW_CTX_DAG_ID=bigquery_data_load
+AIRFLOW_CTX_TASK_ID=gcs_to_big_query
+AIRFLOW_CTX_EXECUTION_DATE=2023-10-14T13:09:55.445694+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-10-14T13:09:55.445694+00:00
+[2023-10-14T13:10:01.095+0000] {base.py:73} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2023-10-14T13:10:01.095+0000] {gcs_to_bigquery.py:377} INFO - Using existing BigQuery table for storing data...
+[2023-10-14T13:10:01.095+0000] {credentials_provider.py:323} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2023-10-14T13:10:01.097+0000] {gcs_to_bigquery.py:381} INFO - Executing: {'load': {'autodetect': True, 'createDisposition': 'CREATE_IF_NEEDED', 'destinationTable': {'projectId': '{ project }', 'datasetId': 'vehicle_analytics', 'tableId': 'history'}, 'sourceFormat': 'CSV', 'sourceUris': ['gs://n1-logistics-landing-bucket/*'], 'writeDisposition': 'WRITE_TRUNCATE', 'ignoreUnknownValues': False, 'skipLeadingRows': 1, 'fieldDelimiter': ',', 'quote': None, 'allowQuotedNewlines': False, 'encoding': 'UTF-8'}}
+[2023-10-14T13:10:01.098+0000] {bigquery.py:1542} INFO - Inserting job ***_bigquery_data_load_gcs_to_big_query_2023_10_14T13_09_55_445694_00_00_c9dc9aad96f18cb0c15c0401c9624844
+[2023-10-14T13:10:01.511+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/google/cloud/transfers/gcs_to_bigquery.py", line 382, in execute
+    job = self._submit_job(self.hook, job_id)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/google/cloud/transfers/gcs_to_bigquery.py", line 309, in _submit_job
+    nowait=True,
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/google/common/hooks/base_google.py", line 462, in inner_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/google/cloud/hooks/bigquery.py", line 1545, in insert_job
+    job._begin()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/base.py", line 518, in _begin
+    timeout=timeout,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/client.py", line 782, in _call_api
+    return call()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/retry.py", line 288, in retry_wrapped_func
+    on_error=on_error,
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/retry.py", line 190, in retry_target
+    return target()
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/_http/__init__.py", line 494, in api_request
+    raise exceptions.from_http_response(response)
+google.api_core.exceptions.BadRequest: 400 POST https://bigquery.googleapis.com/bigquery/v2/projects/airflow-400718/jobs?prettyPrint=false: Invalid project ID '{ project }'. Project IDs must contain 6-63 lowercase letters, digits, or dashes. Some project IDs also include domain name separated by a colon. IDs must start with a letter and may not end with a dash.
+[2023-10-14T13:10:01.540+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=bigquery_data_load, task_id=gcs_to_big_query, execution_date=20231014T130955, start_date=20231014T131000, end_date=20231014T131001
+[2023-10-14T13:10:01.556+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 49 for task gcs_to_big_query (400 POST https://bigquery.googleapis.com/bigquery/v2/projects/airflow-400718/jobs?prettyPrint=false: Invalid project ID '{ project }'. Project IDs must contain 6-63 lowercase letters, digits, or dashes. Some project IDs also include domain name separated by a colon. IDs must start with a letter and may not end with a dash.; 4592)
+[2023-10-14T13:10:01.611+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-10-14T13:10:01.639+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

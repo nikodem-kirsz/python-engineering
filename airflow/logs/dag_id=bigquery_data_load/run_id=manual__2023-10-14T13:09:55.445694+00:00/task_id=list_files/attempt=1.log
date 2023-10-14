@@ -1,0 +1,25 @@
+[2023-10-14T13:09:56.833+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.list_files manual__2023-10-14T13:09:55.445694+00:00 [queued]>
+[2023-10-14T13:09:56.838+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.list_files manual__2023-10-14T13:09:55.445694+00:00 [queued]>
+[2023-10-14T13:09:56.838+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:09:56.838+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-10-14T13:09:56.838+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:09:56.846+0000] {taskinstance.py:1300} INFO - Executing <Task(PythonOperator): list_files> on 2023-10-14 13:09:55.445694+00:00
+[2023-10-14T13:09:56.850+0000] {standard_task_runner.py:55} INFO - Started process 4586 to run task
+[2023-10-14T13:09:56.853+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'bigquery_data_load', 'list_files', 'manual__2023-10-14T13:09:55.445694+00:00', '--job-id', '47', '--raw', '--subdir', 'DAGS_FOLDER/bigquery_data_load.py', '--cfg-path', '/tmp/tmp8hy88vaj']
+[2023-10-14T13:09:56.855+0000] {standard_task_runner.py:83} INFO - Job 47: Subtask list_files
+[2023-10-14T13:09:56.905+0000] {task_command.py:388} INFO - Running <TaskInstance: bigquery_data_load.list_files manual__2023-10-14T13:09:55.445694+00:00 [running]> on host 4c2fe63b7c62
+[2023-10-14T13:09:56.949+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Niko
+AIRFLOW_CTX_DAG_ID=bigquery_data_load
+AIRFLOW_CTX_TASK_ID=list_files
+AIRFLOW_CTX_EXECUTION_DATE=2023-10-14T13:09:55.445694+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-10-14T13:09:55.445694+00:00
+[2023-10-14T13:09:56.951+0000] {base.py:73} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2023-10-14T13:09:56.951+0000] {credentials_provider.py:323} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2023-10-14T13:09:57.291+0000] {python.py:177} INFO - Done. Returned value was: []
+[2023-10-14T13:09:57.307+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=bigquery_data_load, task_id=list_files, execution_date=20231014T130955, start_date=20231014T130956, end_date=20231014T130957
+[2023-10-14T13:09:57.360+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-10-14T13:09:57.379+0000] {taskinstance.py:2578} INFO - 1 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,38 @@
+[2023-10-14T13:17:41.306+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:17:35.740250+00:00 [queued]>
+[2023-10-14T13:17:41.311+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:17:35.740250+00:00 [queued]>
+[2023-10-14T13:17:41.312+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:17:41.312+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-10-14T13:17:41.312+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-14T13:17:41.319+0000] {taskinstance.py:1300} INFO - Executing <Task(GCSToBigQueryOperator): gcs_to_big_query> on 2023-10-14 13:17:35.740250+00:00
+[2023-10-14T13:17:41.323+0000] {standard_task_runner.py:55} INFO - Started process 4877 to run task
+[2023-10-14T13:17:41.325+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'bigquery_data_load', 'gcs_to_big_query', 'manual__2023-10-14T13:17:35.740250+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/bigquery_data_load.py', '--cfg-path', '/tmp/tmp7qn2g_ls']
+[2023-10-14T13:17:41.327+0000] {standard_task_runner.py:83} INFO - Job 55: Subtask gcs_to_big_query
+[2023-10-14T13:17:41.361+0000] {task_command.py:388} INFO - Running <TaskInstance: bigquery_data_load.gcs_to_big_query manual__2023-10-14T13:17:35.740250+00:00 [running]> on host 4c2fe63b7c62
+[2023-10-14T13:17:41.408+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_OWNER=Niko
+AIRFLOW_CTX_DAG_ID=bigquery_data_load
+AIRFLOW_CTX_TASK_ID=gcs_to_big_query
+AIRFLOW_CTX_EXECUTION_DATE=2023-10-14T13:17:35.740250+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-10-14T13:17:35.740250+00:00
+[2023-10-14T13:17:41.410+0000] {base.py:73} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2023-10-14T13:17:41.410+0000] {gcs_to_bigquery.py:377} INFO - Using existing BigQuery table for storing data...
+[2023-10-14T13:17:41.411+0000] {credentials_provider.py:323} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2023-10-14T13:17:41.412+0000] {bigquery.py:2260} INFO - Project is not included in destination_project_dataset_table: vehicle_analytics.history; using project "***-400718"
+[2023-10-14T13:17:41.414+0000] {gcs_to_bigquery.py:381} INFO - Executing: {'load': {'autodetect': True, 'createDisposition': 'CREATE_IF_NEEDED', 'destinationTable': {'projectId': '***-400718', 'datasetId': 'vehicle_analytics', 'tableId': 'history'}, 'sourceFormat': 'CSV', 'sourceUris': ['gs://n1-logistics-landing-bucket/*'], 'writeDisposition': 'WRITE_TRUNCATE', 'ignoreUnknownValues': False, 'skipLeadingRows': 1, 'fieldDelimiter': ',', 'quote': None, 'allowQuotedNewlines': False, 'encoding': 'UTF-8'}}
+[2023-10-14T13:17:41.415+0000] {bigquery.py:1542} INFO - Inserting job ***_bigquery_data_load_gcs_to_big_query_2023_10_14T13_17_35_740250_00_00_91c4ed943b6a40ea1a75e830364d9f5d
+[2023-10-14T13:17:42.330+0000] {taskinstance.py:1768} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.7/site-packages/airflow/providers/google/cloud/transfers/gcs_to_bigquery.py", line 440, in execute
+    job.result(timeout=self.result_timeout, retry=self.result_retry)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/cloud/bigquery/job/base.py", line 728, in result
+    return super(_AsyncJob, self).result(timeout=timeout, **kwargs)
+  File "/home/airflow/.local/lib/python3.7/site-packages/google/api_core/future/polling.py", line 137, in result
+    raise self._exception
+google.api_core.exceptions.NotFound: 404 Not found: Uris gs://n1-logistics-landing-bucket/*
+[2023-10-14T13:17:42.355+0000] {taskinstance.py:1323} INFO - Marking task as FAILED. dag_id=bigquery_data_load, task_id=gcs_to_big_query, execution_date=20231014T131735, start_date=20231014T131741, end_date=20231014T131742
+[2023-10-14T13:17:42.370+0000] {standard_task_runner.py:105} ERROR - Failed to execute job 55 for task gcs_to_big_query (404 Not found: Uris gs://n1-logistics-landing-bucket/*; 4877)
+[2023-10-14T13:17:42.390+0000] {local_task_job.py:208} INFO - Task exited with return code 1
+[2023-10-14T13:17:42.411+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check

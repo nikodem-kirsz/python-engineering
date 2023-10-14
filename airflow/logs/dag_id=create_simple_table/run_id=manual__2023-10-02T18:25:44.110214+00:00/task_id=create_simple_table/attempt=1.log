@@ -1,0 +1,27 @@
+[2023-10-02T18:25:48.720+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: create_simple_table.create_simple_table manual__2023-10-02T18:25:44.110214+00:00 [queued]>
+[2023-10-02T18:25:48.726+0000] {taskinstance.py:1083} INFO - Dependencies all met for <TaskInstance: create_simple_table.create_simple_table manual__2023-10-02T18:25:44.110214+00:00 [queued]>
+[2023-10-02T18:25:48.726+0000] {taskinstance.py:1279} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-02T18:25:48.727+0000] {taskinstance.py:1280} INFO - Starting attempt 1 of 1
+[2023-10-02T18:25:48.727+0000] {taskinstance.py:1281} INFO - 
+--------------------------------------------------------------------------------
+[2023-10-02T18:25:48.736+0000] {taskinstance.py:1300} INFO - Executing <Task(BigQueryInsertJobOperator): create_simple_table> on 2023-10-02 18:25:44.110214+00:00
+[2023-10-02T18:25:48.740+0000] {standard_task_runner.py:55} INFO - Started process 206 to run task
+[2023-10-02T18:25:48.743+0000] {standard_task_runner.py:82} INFO - Running: ['***', 'tasks', 'run', 'create_simple_table', 'create_simple_table', 'manual__2023-10-02T18:25:44.110214+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/create_bq_table.py', '--cfg-path', '/tmp/tmp2bdi1nep']
+[2023-10-02T18:25:48.746+0000] {standard_task_runner.py:83} INFO - Job 3: Subtask create_simple_table
+[2023-10-02T18:25:48.795+0000] {task_command.py:388} INFO - Running <TaskInstance: create_simple_table.create_simple_table manual__2023-10-02T18:25:44.110214+00:00 [running]> on host b162f8c06f9d
+[2023-10-02T18:25:48.861+0000] {taskinstance.py:1509} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=
+AIRFLOW_CTX_DAG_OWNER=Airflow
+AIRFLOW_CTX_DAG_ID=create_simple_table
+AIRFLOW_CTX_TASK_ID=create_simple_table
+AIRFLOW_CTX_EXECUTION_DATE=2023-10-02T18:25:44.110214+00:00
+AIRFLOW_CTX_TRY_NUMBER=1
+AIRFLOW_CTX_DAG_RUN_ID=manual__2023-10-02T18:25:44.110214+00:00
+[2023-10-02T18:25:48.864+0000] {base.py:73} INFO - Using connection ID 'google_cloud_default' for task execution.
+[2023-10-02T18:25:48.865+0000] {bigquery.py:2635} INFO - Executing: {'query': {'query': 'CREATE OR REPLACE TABLE `test_dataset.test_table` (\n  id INT64,\n  name STRING,\n  age INT64\n)', 'useLegacySql': False}}'
+[2023-10-02T18:25:48.865+0000] {credentials_provider.py:323} INFO - Getting connection using `google.auth.default()` since no key file is defined for hook.
+[2023-10-02T18:25:48.868+0000] {bigquery.py:1542} INFO - Inserting job ***_create_simple_table_create_simple_table_2023_10_02T18_25_44_110214_00_00_a0930d3eaa78e399beed8c02ad9f9380
+[2023-10-02T18:25:50.782+0000] {taskinstance.py:1323} INFO - Marking task as SUCCESS. dag_id=create_simple_table, task_id=create_simple_table, execution_date=20231002T182544, start_date=20231002T182548, end_date=20231002T182550
+[2023-10-02T18:25:50.809+0000] {local_task_job.py:208} INFO - Task exited with return code 0
+[2023-10-02T18:25:50.822+0000] {taskinstance.py:2578} INFO - 0 downstream tasks scheduled from follow-on schedule check
